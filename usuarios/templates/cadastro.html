@@ -1,0 +1,62 @@
+<!-- Herdando o conteúdo de bases.html -->
+{% extends "bases/base.html" %}
+<!-- Código para carregar os arquivos estáticos que nos permite usar essa estrutura {% url 'cadastro' %} -->
+{% load static %}
+
+<!-- Bloco de cabeçalho que é herdado do bases.html, evitando a repeticão de código -->
+{% block 'head' %}
+    <link href="{% static 'usuarios/css/css.css' %}" rel="stylesheet">
+{% endblock %}
+{% block 'conteudo' %}
+<br>
+<br>
+<div class="container">
+    <h3 class="font-destaque">Cadastra-se</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{% static 'geral/img/logo.png' %}" alt="Logo vital">
+            <h3>Vital</h3>
+        </div>
+
+    <div class="col-md-9">
+            <!-- Enviando os dados para o views cadastro -->
+            <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
+                
+                <label for="primeiro_nome">Primeiro nome</label>
+                <br>
+                <input type="text" class="input-default" name="primeiro_nome" required autofocus>
+                <br>
+                <br>
+                <label for="ultimo_nome">Último nome</label>
+                <br>
+                <input type="text" class="input-default" name="ultimo_nome" required>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="username">Username</label>
+                    <br>
+                    <input type="text" class="input-default w100" name="username" required>
+                    <br>
+                    <br>
+                    <label for="">Senha</label>
+                    <br>
+                    <input type="text" class="input-default w100" name="senha" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="email">E-mail</label>
+                    <br>
+                    <input type="text" class="input-default w100" name="email">
+                    <br>
+                    <br>
+                    <label for="confirmar_senha">Confirmar senha</label>
+                    <br>
+                    <input type="text" class="input-default w100" name="confirmar_senha">
+                </div>
+            </div>
+            <br>
+            <br>
+            <input style="margin-top: 30px;" type="submit" class="btn-default" value="Cadastrar">
+        </form>
+    </div>
+</div>
+{% endblock %}
