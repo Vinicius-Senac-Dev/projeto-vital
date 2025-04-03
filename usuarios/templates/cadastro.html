@@ -1,11 +1,11 @@
 <!-- Herdando o conteúdo de bases.html -->
 {% extends "bases/base.html" %}
-<!-- Código para carregar os arquivos estáticos que nos permite usar essa estrutura {% url 'cadastro' %} -->
+    <!-- Código para carregar os arquivos estáticos que nos permite usar essa estrutura {% url 'cadastro' %} -->
 {% load static %}
 
 <!-- Bloco de cabeçalho que é herdado do bases.html, evitando a repeticão de código -->
 {% block 'head' %}
-    <link href="{% static 'usuarios/css/css.css' %}" rel="stylesheet">
+<link href="{% static 'usuarios/css/css.css' %}" rel="stylesheet">
 {% endblock %}
 {% block 'conteudo' %}
 <br>
@@ -18,10 +18,11 @@
             <h3>Vital</h3>
         </div>
 
-    <div class="col-md-9">
+        <div class="col-md-9">
             <!-- Enviando os dados para o views cadastro -->
+            <!-- O nome da url tem que ser a mesma da view e a mesma que foi definida na url.py porque será lá que o django irá procurar -->
             <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
-                
+
                 <label for="primeiro_nome">Primeiro nome</label>
                 <br>
                 <input type="text" class="input-default" name="primeiro_nome" required autofocus>
@@ -30,33 +31,46 @@
                 <label for="ultimo_nome">Último nome</label>
                 <br>
                 <input type="text" class="input-default" name="ultimo_nome" required>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="username">Username</label>
+                <br>
+                <input type="text" class="input-default w100" name="username" required>
+                <br>
+                <br>
+                <label for="">Senha</label>
+                <br>
+                <input type="text" class="input-default w100" name="senha" required>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="username">Username</label>
-                    <br>
-                    <input type="text" class="input-default w100" name="username" required>
-                    <br>
-                    <br>
-                    <label for="">Senha</label>
-                    <br>
-                    <input type="text" class="input-default w100" name="senha" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="email">E-mail</label>
-                    <br>
-                    <input type="text" class="input-default w100" name="email">
-                    <br>
-                    <br>
-                    <label for="confirmar_senha">Confirmar senha</label>
-                    <br>
-                    <input type="text" class="input-default w100" name="confirmar_senha">
-                </div>
+            <div class="col-md-4">
+                <label for="email">E-mail</label>
+                <br>
+                <input type="text" class="input-default w100" name="email">
+                <br>
+                <br>
+                <label for="confirmar_senha">Confirmar senha</label>
+                <br>
+                <input type="text" class="input-default w100" name="confirmar_senha">
             </div>
-            <br>
-            <br>
-            <input style="margin-top: 30px;" type="submit" class="btn-default" value="Cadastrar">
+        </div>
+        <br>
+        <br>
+
+        <input style="margin-top: 30px; margin-left: 10px;" type="submit" class="btn-default" value="Cadastrar">
         </form>
+        
     </div>
+
+    <!-- Verifica se existe mensagem adicionadas na view-->
+    {% if messages %}
+        <!-- Se existir, o for irá percorrer cada message dentro de messages -->
+        {% for message in messages %}
+        <!-- E irá imprimir cada mensagem dentro da div com o texto correspondente a mensagem -->
+        <!-- message.tags, verifica qual a mensagem de erro, faz conexão com o settings.py e defini o estilo do bootstrap para a div -->
+            <!-- Na views, temos uma condição para senhas não coincidem, senha menor que 6 caracter e usuário cadastrado, dentro de cada condição adicionamos uma mensagem, são elas que serão buscadas pelo if e logo em seguida percorridas pelo for e apresentar a mensagem na tela. -->
+            <div style="margin-top: 15px; width: 65%;" class="alert {{ message.tags }}"> {{ message }} </div>
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

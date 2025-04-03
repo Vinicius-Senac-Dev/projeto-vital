@@ -12,25 +12,18 @@
    <link href="{% static 'geral/css/base.css' %}" rel="stylesheet">
    <link rel="shortcut icon" href="/static/geral/img/logo.png" />
 
-   {% block 'head' %}
-   {% endblock %}
-</head>
-
+   {% block 'head' %}]{% endblock %}
 <body>
-   <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-light">
       <p>
       <div>
-         <a class="navbar-brand"><img style="  max-width: 10%;margin-top: 20px; width: 250px;" src="{% static 'geral/img/logo.png' %}"></a>
+         <a class="navbar-brand"><img style=" max-width: 10%;margin-top: 20px; width: 250px;" src="{% static 'geral/img/logo.png' %}"></a>
          <a style="color: white; text-decoration: none; padding: 10px;" href="{% url 'cadastro' %}">Cadastro</a>
-         <a style="color: white; text-decoration: none; padding: 10px;">Login</a>
+         <a style="color: white; text-decoration: none; padding: 10px;" href="{% url 'login' %}">Login</a>
       </div>
       </p>
    </nav>
-   {% block 'conteudo' %}
-   {% endblock %}
+   {% block 'conteudo' %}{% endblock %}
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
-
 </body>
-
 </html>

@@ -1,0 +1,37 @@
+<!-- Herdando o conteúdo de bases.html -->
+{% extends "bases/base.html" %}
+<!-- Código para carregar os arquivos estáticos que nos permite usar essa estrutura {% url 'login' %} -->
+{% load static %}
+
+<!-- Bloco de cabeçalho que é herdado do bases.html, evitando a repeticão de código -->
+{% block 'head' %}
+<link href="{% static 'usuarios/css/css.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block 'conteudo' %}
+    <div class="container">
+        <h3 class="font-destaque-secundaria"><img width="15px" src="{% static 'geral/img/logo.png' %}" alt="cadastra-se">Cadastra-se</h3>
+
+        {% if messages %}
+            <br>
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}"> {{message}} </div>
+            {% endfor %}
+        {% endif %}
+
+        <div>
+            <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+                <label for="username">Username</label>
+                <br>
+                <input type="text" class="input-default" name="username">
+                <br><br>
+                <label for="senha">Senha</label>
+                <br>
+                <input type="text" class="input-default" name="senha">
+                <br><br>
+                <input type="submit" class="btn-default" value="Logar">
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
